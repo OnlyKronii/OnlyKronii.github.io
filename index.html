@@ -2,6 +2,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
+    var localCnt = 0;
     function rand(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
@@ -10,7 +11,10 @@
         xhr.open("GET", "https://api.countapi.xyz/hit/onlykronii.github.io/visits");
         xhr.responseType = "json";
         xhr.onload = function() {
+            localCnt += 1;
+            
             document.getElementById('visits').innerText = this.response.value;
+            document.getElementById('localCnt').innerText = 'Local count : ' + localCnt;
         }
         xhr.send();
         lst = ['1.wav','2.wav','3.wav','4.wav','5.wav','6.wav','7.wav','8.wav','9.wav'];
@@ -54,9 +58,10 @@
         <div class="wrap">
             <div class="box">
                <center>
-                    <h1 style="font-family:papyrus; font-size:50px"><span id="visits"></span></h1>
+                    <h1 style="font-family:papyrus; font-size:50px"><span id="visits">-</span></h1>
                     <p style="font-family:papyrus; font-size:30px">Global Gwak Counter</p>
                     <button class="gwakButton" type="button" onclick="Count(true)"><img class="image"  src="button.png" alt="Button"></button><br><br>
+                    <p id="localCnt" style="font-family:papyrus; font-size:30px">Local count : 0</p>
                     <p style="font-family:papyrus; font-size:20px"> Subscribe <a href="https://www.youtube.com/c/OuroKroniiCh">Ouro Kronii Ch. hololive-EN</a><br></p>
                     <p style="font-family:papyrus; font-size:15px"> Illustrated by <a href="https://twitter.com/potatoshura">Shura</a><br></p>
                     <p style="font-family:papyrus; font-size:15px"> Scripted by <a href="https://twitter.com/KyoKMonnoK">Kyono</a><br></p>
