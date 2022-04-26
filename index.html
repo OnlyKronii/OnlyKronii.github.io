@@ -6,6 +6,18 @@
     function rand(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    function num_dot_add(input){
+        input = input.toString();
+        output = '';
+        for(let s = 0; s < input.length; ++s){
+            if(s != input.length && s % 3 == 0 && s != 0)
+                output = ',' + output;
+                output = input[input.length - 1 - s] + output;
+        }
+        return output
+    }
+
     function Count(sound = false){
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "https://api.countapi.xyz/hit/onlykronii.github.io/visits");
@@ -15,15 +27,8 @@
                 localCnt += 1;
                 localStorage['localCnt'] = localCnt + '';
             }
-            document.getElementById('localCnt').innerText = 'Local count : ' + localCnt;
-            value = this.response.value.toString();
-			val_dot = '';
-			for(let s = 0; s < value.length; ++s){
-				if(s != value.length && s % 3 == 0 && s != 0)
-					val_dot = ',' + val_dot;
-				val_dot = value[value.length - 1 - s] + val_dot;
-			}
-            document.getElementById('visits').innerText = val_dot;
+            document.getElementById('localCnt').innerText = 'Local count : ' + num_dot_add(localCnt);
+            document.getElementById('visits').innerText = num_dot_add(this.response.value);
         }
         xhr.send();
         lst = ['1.wav','2.wav','3.wav','4.wav','5.wav','6.wav','7.wav','8.wav','9.wav', '10.wav', 
