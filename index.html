@@ -16,7 +16,14 @@
                 localStorage['localCnt'] = localCnt + '';
             }
             document.getElementById('localCnt').innerText = 'Local count : ' + localCnt;
-            document.getElementById('visits').innerText = this.response.value;
+            value = this.response.value.toString();
+			val_dot = '';
+			for(let s = 0; s < value.length; ++s){
+				if(s != value.length && s % 3 == 0 && s != 0)
+					val_dot = ',' + val_dot;
+				val_dot = value[value.length - 1 - s] + val_dot;
+			}
+            document.getElementById('visits').innerText = val_dot;
         }
         xhr.send();
         lst = ['1.wav','2.wav','3.wav','4.wav','5.wav','6.wav','7.wav','8.wav','9.wav', '10.wav', 
