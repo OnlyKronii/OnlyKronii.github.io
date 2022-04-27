@@ -28,9 +28,8 @@
                 localCntSession += 1;
                 localCntSaved += 1;
                 localStorage['localCnt'] = localCntSaved + '';
-            } else {
-                document.getElementById('localCntSaved').innerText = 'Local count this session : ' + num_dot_add(localCntSaved);
             }
+            document.getElementById('localCntSaved').innerText = 'Local count this session : ' + num_dot_add(localCntSaved);
             document.getElementById('localCntSession').innerText = 'Local count saved : ' + num_dot_add(localCntSession);
             document.getElementById('visits').innerText = num_dot_add(this.response.value);
         }
