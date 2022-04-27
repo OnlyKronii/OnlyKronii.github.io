@@ -18,23 +18,32 @@
         return output
     }
 
-    function Count(sound = false){
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://api.countapi.xyz/hit/onlykronii.github.io/visits");
-        xhr.responseType = "json";
-        xhr.onload = function() {
-            if(sound){
+    function Count(count = false){
+        if(count){
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://api.countapi.xyz/hit/onlykronii.github.io/visits");
+            xhr.responseType = "json";
+            xhr.onload = function() {
                 localCnt += 1;
                 localStorage['localCnt'] = localCnt + '';
+                document.getElementById('localCnt').innerText = 'Local count : ' + num_dot_add(localCnt);
+                document.getElementById('visits').innerText = num_dot_add(this.response.value);
             }
-            document.getElementById('localCnt').innerText = 'Local count : ' + num_dot_add(localCnt);
-            document.getElementById('visits').innerText = num_dot_add(this.response.value);
+        }
+        else{
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://api.countapi.xyz/get/onlykronii.github.io/visits");
+            xhr.responseType = "json";
+            xhr.onload = function() {
+                document.getElementById('localCnt').innerText = 'Local count : ' + num_dot_add(localCnt);
+                document.getElementById('visits').innerText = num_dot_add(this.response.value);
+            }
         }
         xhr.send();
         lst = ['1.wav','2.wav','3.wav','4.wav','5.wav','6.wav','7.wav','8.wav','9.wav', '10.wav', 
             '11.wav','12.wav','13.wav','14.wav','15.wav','16.wav','17.wav','18.wav','19.wav', '20.wav', 
             '21.wav','22.wav','23.wav','24.wav','25.wav','26.wav','27.wav','28.wav'];
-        if(sound){
+        if(count){
             var audio = new Audio('Sounds/' + lst[rand(0,lst.length)]);
             audio.play();
             audio.volume = 0.15;
